@@ -1,0 +1,16 @@
+#!/bin/bash
+echo "dark or white / i or li"
+read colorchoose 
+wal -$colorchoose $@ --backend wal 
+feh --bg-fill $@
+magick convert $@ /usr/share/backgrounds/custom.jpg
+sh ~/.config/awesome/themes/zenburn/script
+sh ~/.telegram-palette-gen/telegram-palette-gen --wal
+echo "$@" > ~/.cache/wallpaper.txt
+newcolor=$(cat ~/.cache/wal/colors.Xresources | grep "\*.color5" | cut -d " " -f 2)
+
+for i in $(find ~/.config/awesome/themes/zenburn/ -name "*.png"); do
+  convert $i -fill "$newcolor" -colorize 100% $i
+done
+
+echo 'awesome.restart()' | awesome-client

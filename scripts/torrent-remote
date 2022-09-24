@@ -1,0 +1,3 @@
+#!/bin/bash 
+transmission-remote -a "$(xclip -o)" -w /home/charles/MassStorage/Movies/
+notify-send 'torrent adicionado'
